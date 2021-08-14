@@ -10,9 +10,9 @@ class TranslateTweet(Flask):
     if not self.debug or os.getenv('WERKZEUG_RUN_MAIN') == 'true':
       with self.app_context():
         translate_tweet()
-        
+
     super(TranslateTweet, self).run(host=host, port=port, debug=debug, load_dotenv=load_dotenv, **options)
 
 if __name__ == "__main__":
     app = TranslateTweet(__name__)
-    app.run(host='0.0.0.0', port=os.environ.get('PORT'), debug=True)
+    app.run(host='0.0.0.0', port=os.environ.get('PORT'), debug=False)
