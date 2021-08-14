@@ -14,7 +14,7 @@ class TweetToEnglish():
         self.max_tweets = 10
         self.mode = 'extended'
 
-    def get_clean_text(self, full_text):
+    def sanitise_text(self, full_text):
 
         full_text_split = full_text.split(' ')
         index = full_text_split.index('@' + self.bot_handle) + 1
@@ -54,7 +54,7 @@ class TweetToEnglish():
             if mention.created_at.timestamp() < start_time or mention.user.screen_name == self.bot_handle:
                 continue
 
-            clean_text = self.get_clean_text(mention.full_text)
+            clean_text = self.sanitise_text(mention.full_text)
 
             value = {
                 'handle': mention.user.screen_name,
