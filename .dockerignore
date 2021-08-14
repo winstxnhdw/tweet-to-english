@@ -1,5 +1,8 @@
-worker/
-.vscode/
+__pycache__/
+Dockerfile
+.vscode
+.gitignore
+api_keys/
 
 *.sh
 *.md
