@@ -71,7 +71,6 @@ def translate_tweet():
     while True:
         mentions = extract_mentions(api)
         reply_translated_tweet(api, mentions)
-        print("DEBUG")
         t.sleep(15)
 
 if __name__ == "__main__":
