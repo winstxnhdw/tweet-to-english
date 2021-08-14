@@ -84,9 +84,8 @@ if __name__ == "__main__":
 
     except ImportError:
         from os import environ as env
-        port = int(env.get('PORT', 5000))
         app = Flask(__name__)
-        app.run(host='0.0.0.0', port=port, debug=False)
+        app.run(host='0.0.0.0', port=int(env.get('PORT')), debug=False)
         CONSUMER_KEY = env['CONSUMER_KEY']
         CONSUMER_SECRET = env['CONSUMER_SECRET']
         ACCESS_TOKEN = env['ACCESS_TOKEN']
