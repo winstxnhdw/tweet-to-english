@@ -40,7 +40,7 @@ def extract_mentions(api):
     mentions_dict = {}
 
     for mention in reversed(mentions):
-        if start_time > mention.created_at.timestamp():
+        if start_time < mention.created_at.timestamp():
             continue
 
         clean_text = get_clean_text(mention.full_text)
