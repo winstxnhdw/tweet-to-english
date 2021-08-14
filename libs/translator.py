@@ -13,16 +13,16 @@ def translate_to_english(text):
         
     auth = IAMAuthenticator(KEY)
 
-    # Identify
     language_translator = LanguageTranslatorV3(version='2018-05-01', authenticator=auth)
     language_translator.set_service_url(URL)
 
-    # Translate
+    # Identify
     language = language_translator.identify(text).get_result()['languages'][0]['language']
 
     if language == 'en':
         return None
 
+    # Translate
     translation = language_translator.translate(text=text, source=language, target='en').get_result()['translations'][0]['translation']
 
     return translation

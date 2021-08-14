@@ -22,11 +22,12 @@ def reply_translated_tweet(api, mentions):
 
     try:
         for mention in mentions:
-            translated = translate_to_english(mentions[mention]['text'])
+            tweet = mentions[mention]
+            translated = translate_to_english(tweet['text'])
             if translated is None:
                 continue
 
-            reply = "@{} {}".format(mentions[mention]['handle'], translated)
+            reply = "@{} {}".format(tweet['handle'], translated)
             api.update_status(reply, mention)
 
     except tweepy.error.TweepError:
