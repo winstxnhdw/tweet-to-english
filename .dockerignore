@@ -1,8 +1,5 @@
-__pycache__/
-Dockerfile
-.vscode
-.gitignore
-api_keys/
+worker/
+.vscode/
 
 *.sh
 *.md

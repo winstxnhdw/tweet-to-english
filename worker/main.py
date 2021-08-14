@@ -1,7 +1,6 @@
 import tweepy
 import time as t
 
-from flask import Flask
 from libs.translator import translate_to_english
 
 def oauth_login(consumer_key, consumer_secret, access_token, access_token_secret):
@@ -78,14 +77,11 @@ def main(api):
         t.sleep(15)
  
 if __name__ == "__main__":
-
     try:
         from api_keys.tweepy import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
 
     except ImportError:
         from os import environ as env
-        app = Flask(__name__)
-        app.run(host='0.0.0.0', port=int(env.get('PORT')), debug=False)
         CONSUMER_KEY = env['CONSUMER_KEY']
         CONSUMER_SECRET = env['CONSUMER_SECRET']
         ACCESS_TOKEN = env['ACCESS_TOKEN']
