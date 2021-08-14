@@ -72,7 +72,7 @@ def translate_tweet():
     while True:
         mentions = extract_mentions(api)
         reply_translated_tweet(api, mentions)
-        t.sleep(30)
+        t.sleep(60)
 
 if __name__ == "__main__":
     translate_tweet()
