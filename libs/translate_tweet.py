@@ -10,23 +10,13 @@ def oauth_login(consumer_key, consumer_secret, access_token, access_token_secret
 
     return tweepy.API(auth, wait_on_rate_limit=True)
 
-def retrieve_last_seen_id(dir_path):
+def get_clean_text(full_text):
 
-    try:
-        f_read = open(dir_path, 'r')
-        last_id = int(f_read.read().strip())
-        f_read.close()
+    user_handle = "@twt2eng"
+    full_text_split = full_text.split(' ')
+    index = full_text_split.index(user_handle) + 1
 
-    except ValueError:
-        last_id = None
-
-    return last_id  
-
-def save_last_seen_id(last_id, dir_path):
-
-    f_write = open(dir_path, 'w')
-    f_write.write(str(last_id))
-    f_write.close()
+    return ' '.join(full_text_split[index:])
 
 def reply_translated_tweet(api, mentions):
 
@@ -34,11 +24,9 @@ def reply_translated_tweet(api, mentions):
         for mention in mentions:
             translated = translate_to_english(mentions[mention]['text'])
             if translated is None:
-                reply = "@{} Why do I need to translate English to English?".format(mentions[mention]['handle'])
-                api.update_status(reply, mention)
                 continue
 
-            reply = "@{} {}", mention[mention]['handle'], translated
+            reply = "@{} {}".format(mentions[mention]['handle'], translated)
             api.update_status(reply, mention)
 
     except tweepy.error.TweepError:
@@ -46,26 +34,23 @@ def reply_translated_tweet(api, mentions):
 
 def extract_mentions(api):
     
-    user_handle = "@twt2eng" + " "
+    start_time = t.time()
     dir_path = 'data/last_seen_id.txt'
-
-    last_id = retrieve_last_seen_id(dir_path)
-
-    if last_id is None:
-        mentions = api.mentions_timeline()
-
-    else:
-        mentions = api.mentions_timeline(last_id, tweet_mode='extended')
-
+    mentions = api.mentions_timeline(tweet_mode='extended')
     mentions_dict = {}
 
     for mention in reversed(mentions):
-        text = mention.text.replace(user_handle, '')
-        value = {'handle': mention.user.screen_name, 'text': text}
-        mentions_dict[mention.id] = value
-        last_id = mention.id
+        if start_time < mention.created_at.timestamp():
+            continue
 
-    save_last_seen_id(last_id, dir_path)
+        clean_text = get_clean_text(mention.full_text)
+
+        value = {
+            'handle': mention.user.screen_name,
+            'text': clean_text,
+            'timestamp': mention.created_at.timestamp()
+        }
+        mentions_dict[mention.id] = value
 
     return mentions_dict
 
@@ -86,4 +71,8 @@ def translate_tweet():
     while True:
         mentions = extract_mentions(api)
         reply_translated_tweet(api, mentions)
+        print("DEBUG")
         t.sleep(15)
+
+if __name__ == "__main__":
+    translate_tweet()
