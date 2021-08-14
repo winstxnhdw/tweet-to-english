@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 
 COPY . ./
 
-CMD ["python", "translate_tweet.py"]
+CMD ["python", "-u", "translate_tweet.py"]

@@ -18,6 +18,7 @@ def translate_to_english(text):
 
     # Identify
     language = language_translator.identify(text).get_result()['languages'][0]['language']
+    print("Detected language: {}".format(language))
 
     if language == 'en':
         return None
