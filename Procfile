@@ -1,0 +1,1 @@
+worker: python translate_tweet.py
