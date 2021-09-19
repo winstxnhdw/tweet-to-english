@@ -10,7 +10,7 @@ class TweetToEnglish():
         self.api = None
         self.last_id = None
         
-        self.bot_handle = "twt2eng"
+        self.bot_handle = 'twt2eng'
         self.max_tweets = 10
         self.mode = 'extended'
 
@@ -27,13 +27,13 @@ class TweetToEnglish():
             for mention in mentions:
                 tweet = mentions[mention]
                 translated = translate_to_english(tweet['text'])
-                print("Translated reply ({}): {}".format(mention, translated))
+                print(f"Translated reply ({mention}): {translated}")
                 if translated is None:
                     continue
 
-                reply = "@{} {}".format(tweet['handle'], translated)
+                reply = f"@{tweet['handle']} {translated}"
                 self.api.update_status(reply, mention)
-                print("Replied to {}.".format(mention))
+                print(f"Replied to {mention}.")
 
         except tweepy.error.TweepError:
             print("No tweets were translated.")
@@ -48,6 +48,7 @@ class TweetToEnglish():
 
         else:
             mentions = self.api.mentions_timeline(since_id=self.last_id, count=self.max_tweets, tweet_mode=self.mode)
+            
         mentions_dict = {}
 
         for mention in mentions:
