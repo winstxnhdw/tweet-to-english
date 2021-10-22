@@ -23,27 +23,24 @@ class TweetToEnglish():
 
     def reply_translated_tweet(self, mentions):
 
-        try:
-            for mention in mentions:
-                tweet = mentions[mention]
-                translated = translate_to_english(tweet['text'])
-                print(f"Translated reply ({mention}): {translated}")
-                if translated is None:
-                    continue
+        for mention in mentions:
+            tweet = mentions[mention]
 
-                reply = f"@{tweet['handle']} {translated}"
-                self.api.update_status(reply, mention)
-                print(f"Replied to {mention}.")
+            translated = translate_to_english(tweet['text'])
+            print(f"Translated reply ({mention}): {translated}")
 
-        except tweepy.error.TweepError:
-            print("No tweets were translated.")
-            return
+            if not translated:
+                continue
+
+            reply = f"@{tweet['handle']} {translated}"
+            self.api.update_status(reply, mention)
+            print(f"Replied to {mention}.")
 
     def extract_mentions(self, start_time):
 
         print("\nExtracting timeline mentions..")
 
-        if self.last_id is None:
+        if not self.last_id:
             mentions = self.api.mentions_timeline(count=self.max_tweets, tweet_mode=self.mode)
 
         else:
@@ -93,7 +90,13 @@ def translate_tweet():
 
     while True:
         mentions = bot.extract_mentions(start_time)
-        bot.reply_translated_tweet(mentions)
+
+        try:
+            bot.reply_translated_tweet(mentions)
+        
+        except tweepy.error.TweepError:
+            print("No tweets were translated.")
+
         print("Cycle complete.")
         t.sleep(30)
 
