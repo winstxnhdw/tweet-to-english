@@ -17,7 +17,7 @@ class TweetToEnglish():
     def sanitise_text(self, full_text):
 
         full_text_split = full_text.split(' ')
-        index = full_text_split.index('@' + self.bot_handle) + 1
+        index = full_text_split.index(f'@{self.bot_handle}') + 1
 
         return ' '.join(full_text_split[index:])
 
