@@ -5,9 +5,9 @@ from libs.translator import translate_to_english
 
 class TweetToEnglish():
 
-    def __init__(self):
+    def __init__(self, auth):
 
-        self.api = None
+        self.api = tweepy.API(auth, wait_on_rate_limit=True)
         self.last_id = None
         
         self.bot_handle = 'twt2eng'
@@ -69,9 +69,11 @@ def oauth_login(consumer_key, consumer_secret, access_token, access_token_secret
      
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-    return tweepy.API(auth, wait_on_rate_limit=True)
+    return auth
 
 def translate_tweet():
+    
+    print("\nInitialising Twitter bot..")
     
     try:
         from api_keys.tweepy import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
@@ -83,8 +85,8 @@ def translate_tweet():
         ACCESS_TOKEN = env['ACCESS_TOKEN']
         ACCESS_TOKEN_SECRET = env['ACCESS_TOKEN_SECRET']
 
-    bot = TweetToEnglish()
-    bot.api = oauth_login(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    auth = oauth_login(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    bot = TweetToEnglish(auth)
     
     start_time = t.time()
 
@@ -101,5 +103,4 @@ def translate_tweet():
         t.sleep(30)
 
 if __name__ == "__main__":
-    print("\nInitialising Twitter bot..")
     translate_tweet()
