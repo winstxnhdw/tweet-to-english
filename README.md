@@ -19,17 +19,17 @@ pip install -r requirements.txt
 Create a `api_keys/tweepy.py` file with the following contents.
 
 ```python
-CONSUMER_KEY= '<your consumer key>'
-CONSUMER_SECRET= '<your consumer secret>'
-ACCESS_TOKEN= '<your access token>'
-ACCESS_TOKEN_SECRET= '<your access token secret>'
+CONSUMER_KEY='<your consumer key>'
+CONSUMER_SECRET='<your consumer secret>'
+ACCESS_TOKEN='<your access token>'
+ACCESS_TOKEN_SECRET='<your access token secret>'
 ```
 
 Create a `api_keys/ibm.py` file with the following contents.
 
 ```python
-KEY= '<your API key>'
-URL= '<your API URL>'
+KEY='<your API key>'
+URL='<your API URL>'
 ```
 
 ## Usage
