@@ -8,7 +8,7 @@ A Twitter bot that detects the language of tweets and translates them into Engli
 
 ### Requirements
 
-Run the following to install Docker on either Arch Linux or Ubuntu. If you are using another operating system, you will have to install Docker manually.
+Run the following to install Docker on either Arch Linux or Ubuntu. If you are on another platform, you will have to install Docker manually [here](https://docs.docker.com/get-docker/).
 
 ```bash
 sh requirements.sh
