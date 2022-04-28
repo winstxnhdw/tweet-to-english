@@ -4,9 +4,7 @@ A Twitter bot that detects the language of tweets and translates them into Engli
 
 > This bot uses polling. Please use [webhooks](https://en.wikipedia.org/wiki/Webhook) instead.
 
-## Installation
-
-### Requirements
+## Requirements
 
 Run the following to install Docker on either Arch Linux or Ubuntu. If you are on another platform, you will have to install Docker manually [here](https://docs.docker.com/get-docker/).
 
@@ -14,7 +12,7 @@ Run the following to install Docker on either Arch Linux or Ubuntu. If you are o
 sh requirements.sh
 ```
 
-### API Keys
+## API Keys
 
 Create a `api_keys/tweepy.py` file with the following contents.
 
