@@ -8,10 +8,10 @@ A Twitter bot that detects the language of tweets and translates them into Engli
 
 ### Requirements
 
-Once you have installed [Docker](https://docs.docker.com/get-docker/) and [Python](https://www.python.org/downloads/), run the following block to install the remaining dependencies.
+Run the following to install Docker on either Arch Linux or Ubuntu. If you are using another operating system, you will have to install Docker manually.
 
 ```bash
-pip install -r requirements.txt
+sh requirements.sh
 ```
 
 ### API Keys
