@@ -8,7 +8,7 @@ A Twitter bot that detects the language of tweets and translates them into Engli
 
 ### Requirements
 
-Once you have installed Docker and Python, run the following block.
+Once you have installed [Docker](https://docs.docker.com/get-docker/) and [Python](https://www.python.org/downloads/), run the following block.
 
 ```bash
 pip install -r requirements.txt
