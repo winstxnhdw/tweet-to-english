@@ -8,10 +8,11 @@ A Twitter bot that detects the language of tweets and translates them into Engli
 
 ### Requirements
 
-* Docker
-* Tweepy
-* ibm_watson
-* ibm_cloud_sdk_core
+Once you have installed Docker and Python, run the following block.
+
+```bash
+pip install -r requirements.txt
+```
 
 ### API Keys
 
